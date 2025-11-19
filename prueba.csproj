@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="EntityFrameworkCore.CreatedUpdatedDate" Version="8.0.0" />
+        <PackageReference Include="Humanizer" Version="2.14.1" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.22" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.10" />
+        <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.6" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="bounded_context\Application\Internal\CommandServices\" />
+      <Folder Include="bounded_context\Application\Internal\QueryServices\" />
+      <Folder Include="bounded_context\Domain\Model\" />
+      <Folder Include="bounded_context\Domain\Repositories\" />
+      <Folder Include="bounded_context\Domain\Services\" />
+      <Folder Include="bounded_context\Infrastructure\Persistence\EFC\Repositories\" />
+      <Folder Include="bounded_context\Interfaces\REST\Resources\" />
+      <Folder Include="bounded_context\Interfaces\REST\Transform\" />
+    </ItemGroup>
+
+</Project>
