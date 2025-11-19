@@ -1,7 +1,5 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
-using prueba.Resources;
 using prueba.bounded_context.Domain.Services;
 using prueba.bounded_context.Interfaces.REST.Resources;
 using prueba.bounded_context.Interfaces.REST.Transform;
@@ -16,8 +14,7 @@ namespace prueba.bounded_context.Interfaces.REST;
 [Produces(MediaTypeNames.Application.Json)]
 [Tags("Bills")]
 public class BillsController(
-    IBillCommandService commandService,
-    IStringLocalizer<SharedResource> localizer) : ControllerBase
+    IBillCommandService commandService) : ControllerBase
 {
     /// <summary>
     ///     Creates a new bill
@@ -37,7 +34,7 @@ public class BillsController(
         {
             var result = await commandService.Handle(command);
             if (result is null)
-                return Conflict(localizer["BillDuplicated"].Value);
+                return Conflict(new { error = "Bill already exists" });
 
             var resource = BillResourceFromEntityAssembler.ToResourceFromEntity(result);
             return Created($"/api/v1/bills/{result.BillNumber}", resource);
