@@ -14,13 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Lowercase URLs
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
-// Localization
-builder.Services.AddLocalization();
-
 // Controllers + kebab case
 builder.Services.AddControllers(options =>
-        options.Conventions.Add(new KebabCaseRouteNamingConvention()))
-    .AddDataAnnotationsLocalization();
+        options.Conventions.Add(new KebabCaseRouteNamingConvention()));
 
 // --- Swagger limpio ---
 builder.Services.AddEndpointsApiExplorer();
@@ -83,16 +79,6 @@ using (var scope = app.Services.CreateScope())
 // Swagger
 app.UseSwagger();
 app.UseSwaggerUI();
-
-// Localization
-var supportedCultures = new[] { "en", "en-US", "es", "es-PE" };
-var localizationOptions = new RequestLocalizationOptions()
-    .SetDefaultCulture(supportedCultures[0])
-    .AddSupportedCultures(supportedCultures)
-    .AddSupportedUICultures(supportedCultures);
-
-localizationOptions.ApplyCurrentCultureToResponseHeaders = true;
-app.UseRequestLocalization(localizationOptions);
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
