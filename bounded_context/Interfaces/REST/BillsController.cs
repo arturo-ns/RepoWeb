@@ -5,7 +5,6 @@ using prueba.Resources;
 using prueba.bounded_context.Domain.Services;
 using prueba.bounded_context.Interfaces.REST.Resources;
 using prueba.bounded_context.Interfaces.REST.Transform;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace prueba.bounded_context.Interfaces.REST;
 
@@ -24,10 +23,9 @@ public class BillsController(
     ///     Creates a new bill
     /// </summary>
     [HttpPost]
-    [SwaggerOperation(Summary = "Creates a bill")]
-    [SwaggerResponse(201, "Created", typeof(BillResource))]
-    [SwaggerResponse(400, "Bad Request")]
-    [SwaggerResponse(409, "Conflict")]
+    [ProducesResponseType(typeof(BillResource), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult> CreateBill([FromBody] CreateBillResource resource)
     {
         if (!ModelState.IsValid) 
