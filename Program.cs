@@ -66,9 +66,10 @@ else
 // --- Dependency Injection ---
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped<ITuEntidadRepository, TuEntidadRepository>();
-builder.Services.AddScoped<ITuEntidadCommandService, TuEntidadCommandService>();
-builder.Services.AddScoped<ITuEntidadQueryService, TuEntidadQueryService>();
+// Bills bounded context
+builder.Services.AddScoped<bounded_context.Domain.Repositories.IBillRepository, bounded_context.Infrastructure.Persistence.EFC.Repositories.BillRepository>();
+builder.Services.AddScoped<bounded_context.Domain.Services.IBillCommandService, bounded_context.Application.Internal.CommandServices.BillCommandService>();
+builder.Services.AddScoped<bounded_context.Domain.Services.IBillQueryService, bounded_context.Application.Internal.QueryServices.BillQueryService>();
 
 var app = builder.Build();
 
